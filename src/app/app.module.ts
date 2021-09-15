@@ -5,11 +5,11 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { StarshipsComponent } from './starships/starships.component';
-import { PilotsComponent } from './pilots/pilots.component';
+import { StarshipsComponent } from './components/starships/starships.component';
+import { PilotsComponent } from './components/pilots/pilots.component';
 
 @NgModule({
   declarations: [
