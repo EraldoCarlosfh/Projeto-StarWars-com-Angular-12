@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+html {
+
+  background-image: url(https://media.giphy.com/media/1ylebTFyDHaa46IDgO/source.gif?cid=ecf05e47zmd8g6oewc9mwl0lx546t5klwiskzdp13yb5y9yr&rid=source.gif&ct=g);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: initial;
+  width: 100%;
+  height: 100%;
+
+}

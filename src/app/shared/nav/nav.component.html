@@ -1,0 +1,50 @@
+<nav class="toolbar" role="banner">
+  <div>
+    <a routerLink="/home">
+      <img width="80" alt="Logo Star Wars" src="../assets/StarWars.png"/>
+    </a>
+    <span>{{ title }}</span>
+  </div>
+
+  <div>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/home" id="menu"><i class="fas fa-home" style="font-size: 15px;"></i>&nbsp;&nbsp;Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/starships" id="menu"><i class="fab fa-galactic-senate"></i>&nbsp;&nbsp;Starships</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/pilots" id="menu"><i class="fab fa-jedi-order"></i>&nbsp;&nbsp;Pilots</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Paginas -->
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav"> [collapse]="isCollapsed" [isAnimated]="true"
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/home" style="color:white;"><i class="fas fa-home" style="font-size: 15px;"></i>&nbsp;&nbsp;Home</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/starships" style="color:white;">&nbsp;&nbsp;Starships</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/pilots" style="color:white;">&nbsp;&nbsp;Pilots</a>
+        </li>
+      </ul>
+      <div *ngIf="isCollapsed === true" class="navbar-nav">
+        <span style="font-size: 12px;">
+          {{today}}
+        </span>
+      </div>
+    </div>
+  </div>
+</nav> -->
