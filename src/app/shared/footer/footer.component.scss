@@ -1,15 +1,26 @@
 footer {
-background-color: #EEEEEE;
+background-color: #1F2738;
 margin-bottom: 0;
 height: 70px;
 align-content: center;
 margin-top: 80px !important;
+border: none !important;
 }
 
 i {
-  color: #1F2738;
+  color: #EEEEEE;
 }
 
 i:hover{
   color: #F56F36;
+}
+
+span {
+ color: #EEEEEE!important;
+ font-size: 15px;
+}
+
+.icon {
+  margin-left: 70px;
+  align-items: center;
 }
