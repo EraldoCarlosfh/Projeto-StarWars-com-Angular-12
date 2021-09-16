@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-import { StarshipsService } from './services/starships.service'
-import { FilmsService } from './services/films.service'
-import { PeopleService } from './services/people.service'
+import { StarshipsService } from './services/starships.service';
+import { FilmsService } from './services/films.service';
+import { PeopleService } from './services/people.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,14 +30,16 @@ import { PilotsComponent } from './components/pilots/pilots.component';
   imports: [
     BrowserModule,
     CollapseModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
+      progressAnimation: 'increasing',
       progressBar: true
     }),
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     NgxSpinnerModule
   ],
   providers: [
