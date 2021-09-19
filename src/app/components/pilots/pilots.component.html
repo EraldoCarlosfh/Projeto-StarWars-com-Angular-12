@@ -14,7 +14,7 @@
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" *ngFor="let people of peoplesFiltered" style="cursor: pointer;">
-      <a (click)="openModal(template, people)"><div class="card">
+      <a (click)="openModal(people)"><div class="card">
         <img src="../assets/unnamed.jpg" class="card-img-top" alt="...">
         <div class="card-footer">
           <small class="text-muted">{{people.name}}</small>
@@ -24,26 +24,6 @@
     </div>
   </div>
 
+  <button (click)="viewButton = !viewButton" (click)="loading()" class="btn btn-primary mt-3">{{nameButton}}</button>
+
 </div>
-
-<ng-template #template>
-
-  <div class="div container">
-    <div class="card" id="details">
-      <img src="../assets/starwars.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h4 class="card-title">Name: {{people.name}}</h4>
-        <hr class="solid">
-        <h4 class="card-title">Age: {{people.mass}}</h4>
-        <hr class="solid">
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-      </ul>
-    </div>
-
-
-  </div>
-</ng-template>

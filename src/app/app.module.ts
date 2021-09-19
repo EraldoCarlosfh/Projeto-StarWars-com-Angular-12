@@ -19,6 +19,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { StarshipsComponent } from './components/starships/starships.component';
 import { PilotsComponent } from './components/pilots/pilots.component';
+import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PilotsComponent } from './components/pilots/pilots.component';
       FooterComponent,
       HomeComponent,
       StarshipsComponent,
-      PilotsComponent
+      PilotsComponent,
+      ModalComponent
    ],
   imports: [
     BrowserModule,

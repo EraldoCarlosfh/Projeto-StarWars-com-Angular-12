@@ -52,8 +52,8 @@ export class StarshipsComponent implements OnInit {
 
   public GetAllStarship(): void {
     this.starshipService.getStarship().subscribe(
-      (peoples: Starship[]) => {
-        this.starships = peoples;
+      (starships: any) => {
+        this.starships = starships.results;
         this.starshipsFiltered = this.starships;
         this.toastr.success('Dados carregados', 'Sucesso!');
       },

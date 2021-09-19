@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { People } from 'src/app/models/People';
 import { PeopleService } from 'src/app/services/people.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
 @Component({
   selector: 'app-pilots',
   templateUrl: './pilots.component.html',
@@ -14,9 +15,14 @@ export class PilotsComponent implements OnInit {
   modalRef!: BsModalRef;
   public peopleName!: String;
   public peopleMass!: String;
+  public peopleFilms: People[] = [];
   public peoples: People[] = [];
   public peoplesFiltered: People[] = [];
   people = {} as People;
+
+  public initial = 6;
+  public viewButton = true;
+  nameButton = 'ver mais';
 
   private filtroListado = '';
 
@@ -52,11 +58,44 @@ export class PilotsComponent implements OnInit {
     );
   }
 
+  public loading(): void {
+    // if (this.viewButton) {
+    //   this.peoplesFiltered.length = this.initial;
+    //   this.nameButton = 'Ver mais';
+    // }else {
+    //   this.peoplesFiltered =  this.peoplesFiltered;
+    //   this.nameButton = 'Ver menos';
+    // }
+    this.GetAllPeople();
+  }
+
+
+  // public loading():void {
+  //   if (this.viewButton) {
+  //     this.peoplesFiltered.length = this.initial;
+  //     this.nameButton = 'Ver mais';
+  //   }else {
+  //     this.peoplesFiltered.length = 10;
+  //     this.nameButton = 'Ver menos';
+  //   }
+  // }
+
   public GetAllPeople(): void {
     this.peopleService.getPeople().subscribe(
-      (peoples: People[]) => {
-        this.peoples = peoples;
+      (peoples: any) => {
+        this.peoples = peoples.results;
         this.peoplesFiltered = this.peoples;
+        console.log("teste", peoples);
+        console.log("Filtrado", this.peoplesFiltered);
+        console.log("This", this.peoples);
+
+        if (this.viewButton) {
+          this.peoplesFiltered.length = this.initial;
+          this.nameButton = 'Ver mais';
+        }else {
+          this.peoplesFiltered =  this.peoplesFiltered;
+          this.nameButton = 'Ver menos';
+        }
         this.toastr.success('Dados carregados', 'Sucesso!');
       },
       (error: any) => {
@@ -66,12 +105,11 @@ export class PilotsComponent implements OnInit {
     ).add(() => this.spinner.hide());
   }
 
-  openModal(template: any, people: People): void {
-    // peopleName: string, peopleMass: string
-    console.log(people);
-    // this.peopleName = peopleName;
-    // this.peopleMass = peopleMass;
-    this.modalRef = this.modalService.show(template, people);
+  openModal(people: People): void {
+    let initialState = {
+      people
+    }
+    this.modalRef = this.modalService.show(ModalComponent, {class: 'modal-lg', initialState} );
   }
 
   confirmPeople(): void {

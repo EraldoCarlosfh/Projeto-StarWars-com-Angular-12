@@ -6,6 +6,10 @@
   border: 2px solid #1F2738 !important;
 }
 
+img:hover, .card-footer:hover {
+  background-color: #F56F36;
+}
+
 .card:hover {
   border: 2px solid #F56F36 !important;
 }
@@ -15,9 +19,9 @@
   text-align: center;
 }
 
-.card-footer:hover {
-  background-color: #F56F36;
-}
+// .card-footer:hover {
+//   background-color: #F56F36;
+// }
 
 small {
   color: rgb(221, 221, 221) !important;
@@ -40,25 +44,3 @@ small {
 #search {
   border-radius: 20px;
 }
-
-#details {
-  color: #EEE;
-  background-color: #1F2738;
-  border: none !important;
-}
-
-li {
-  color: #EEE;
-  background-color: #1F2738;
-}
-
-h4:hover, li:hover {
-  color: #F56F36;
-}
-
-.card-title, .list-group-item {
-  display: flex;
-  justify-content: center;
-}
-
-

@@ -1,0 +1,15 @@
+  <div class="card" id="details">
+    <img src="../assets/starwars.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h4 class="card-title">Name: {{people.name}}</h4>
+      <hr class="solid">
+      <h4 class="card-title">Age: {{people.mass}}</h4>
+       <hr class="solid">
+    </div>
+    <ul class="list-group list-group-flush">
+      <h4 class="card-title">Episodes:</h4>
+     <div *ngFor="let films of filmesFiltered">
+       <li class="list-group-item">Filme: {{films}}</li>
+     </div>
+    </ul>
+  </div>

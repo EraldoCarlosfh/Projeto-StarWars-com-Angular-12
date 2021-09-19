@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 
 export class FilmsService {
 
-  public endpoint = 'api/films';
+  public endpoint = 'films';
 
   constructor(
     private http: HttpClient
@@ -17,13 +17,13 @@ export class FilmsService {
 
   public getFilms(): Observable<Films[]> {
     return this.http
-      .get<Films[]>(environment.api3 + this.endpoint)
+      .get<Films[]>(environment.api + this.endpoint)
       .pipe(take(1));
   }
 
   public getFilmsById(id: number,): Observable<Films> {
     return this.http
-      .get<Films>(`${environment.api3 + this.endpoint}/${id}`)
+      .get<Films>(`${environment.api + this.endpoint}/${id}`)
       .pipe(take(1));
   }
 

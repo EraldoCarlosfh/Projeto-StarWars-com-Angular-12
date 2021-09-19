@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 
 export class PeopleService {
 
-  public endpoint = 'peoples';
+  public endpoint = 'people';
 
   constructor(
     private http: HttpClient
@@ -17,13 +17,13 @@ export class PeopleService {
 
   public getPeople(): Observable<People[]> {
     return this.http
-      .get<People[]>(environment.api2 + this.endpoint)
+      .get<People[]>(environment.api + this.endpoint)
       .pipe(take(1));
   }
 
   public getPeopleById(id: number,): Observable<People> {
     return this.http
-      .get<People>(`${environment.api2 + this.endpoint}/${id}`)
+      .get<People>(`${environment.api + this.endpoint}/${id}`)
       .pipe(take(1));
   }
 
