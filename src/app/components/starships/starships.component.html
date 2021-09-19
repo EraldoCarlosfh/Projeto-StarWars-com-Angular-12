@@ -1,97 +1,26 @@
 <app-home></app-home>
-
-  <!-- <div class="card-deck" *ngFor="let star of starshipsFiltered">
-    <div class="card">
-      <img class="card-img-top" src="../assets/Ghost-Fathead.png" alt="Card image cap">
-      <div class="card-footer">
-       <small class="text-muted">{{star.name}}</small>
-      </div>
-    </div>
-  </div> -->
-
 <div class="container">
   <div class="title">
     <p>Starships</p>
   </div>
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
+
+  <div class="d-flex">
+    <div class="flex-fill pr-3">
+      <div class="input-group mb-2">
+        <input type="search" class="form-control" placeholder="Filtrar por Nome" [(ngModel)]="filtroLista" id="search">
       </div>
     </div>
   </div>
 
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
-      </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let star of starshipsFiltered" style="cursor: pointer;">
+        <div class="card">
+          <img src="../assets/Ghost-Fathead.png" class="card-img-top" alt="...">
+          <div class="card-footer">
+            <small class="text-muted">{{star.name}}</small>
+          </div>
+        </div>
     </div>
   </div>
 
-
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
-      </div>
-    </div>
-  </div>
 </div>

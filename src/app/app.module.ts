@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
@@ -29,9 +31,10 @@ import { PilotsComponent } from './components/pilots/pilots.component';
    ],
   imports: [
     BrowserModule,
+    FormsModule,
     CollapseModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 1000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressAnimation: 'increasing',
@@ -39,6 +42,7 @@ import { PilotsComponent } from './components/pilots/pilots.component';
     }),
     AppRoutingModule,
     HttpClientModule,
+    ModalModule.forRoot(),
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],

@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   showMenu(): boolean {
     return (
       this.router.url != '/starships' &&
-      this.router.url != '/pilots'
+      this.router.url != '/pilots' &&
+      this.router.url != '/pilotsdetails'
     );
   }
 

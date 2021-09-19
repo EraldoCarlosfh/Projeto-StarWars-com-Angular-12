@@ -1,97 +1,49 @@
 <app-home></app-home>
 <div class="container">
-
-  <!-- <div class="card-deck" *ngFor="let people of peoplesFiltered" >
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-       <small class="text-muted">{{people.name}}</small>
-      </div>
-    </div>
-  </div> -->
-
   <div class="title">
     <p>Pilots</p>
   </div>
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
+
+  <div class="d-flex">
+    <div class="flex-fill pr-3">
+      <div class="input-group mb-2">
+        <input type="search" class="form-control" placeholder="Filtrar por Nome" [(ngModel)]="filtroLista" id="search">
       </div>
     </div>
   </div>
 
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let people of peoplesFiltered" style="cursor: pointer;">
+      <a (click)="openModal(template, people)"><div class="card">
+        <img src="../assets/unnamed.jpg" class="card-img-top" alt="...">
+        <div class="card-footer">
+          <small class="text-muted">{{people.name}}</small>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
-      </div>
+    </a>
     </div>
   </div>
 
-
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">X-wing</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Black One</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Milenium Falcon</small>
-      </div>
-    </div>
-    <div class="card">
-      <img class="card-img-top" src="../assets/unnamed.jpg" alt="Card image cap">
-      <div class="card-footer">
-        <small class="text-muted">Razor Crest</small>
-      </div>
-    </div>
-  </div>
 </div>
+
+<ng-template #template>
+
+  <div class="div container">
+    <div class="card" id="details">
+      <img src="../assets/starwars.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">Name: {{people.name}}</h4>
+        <hr class="solid">
+        <h4 class="card-title">Age: {{people.mass}}</h4>
+        <hr class="solid">
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+      </ul>
+    </div>
+
+
+  </div>
+</ng-template>

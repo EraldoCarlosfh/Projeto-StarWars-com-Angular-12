@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { StarshipsService } from 'src/app/services/starships.service';
 import { Starship } from 'src/app/models/Starship';
@@ -11,7 +12,7 @@ import { Starship } from 'src/app/models/Starship';
 })
 export class StarshipsComponent implements OnInit {
 
-  public peopleId!: number;
+  modalRef!: BsModalRef;
   public starships: Starship[] = [];
   public starshipsFiltered: Starship[] = [];
   starship = {} as Starship;
@@ -32,6 +33,7 @@ export class StarshipsComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private starshipService: StarshipsService,
+    private modalService: BsModalService,
     private toastr: ToastrService,
   ) { }
 
@@ -53,13 +55,13 @@ export class StarshipsComponent implements OnInit {
       (peoples: Starship[]) => {
         this.starships = peoples;
         this.starshipsFiltered = this.starships;
+        this.toastr.success('Dados carregados', 'Sucesso!');
       },
       (error: any) => {
-        this.toastr.error('Erro ao carregar as Starships', 'Erro!');
+        this.toastr.error('Erro ao carregar dados', 'Erro!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());
-
   }
 
 }

@@ -36,3 +36,29 @@ small {
   margin-right: 25px;
   margin-top: 25px;
 }
+
+#search {
+  border-radius: 20px;
+}
+
+#details {
+  color: #EEE;
+  background-color: #1F2738;
+  border: none !important;
+}
+
+li {
+  color: #EEE;
+  background-color: #1F2738;
+}
+
+h4:hover, li:hover {
+  color: #F56F36;
+}
+
+.card-title, .list-group-item {
+  display: flex;
+  justify-content: center;
+}
+
+

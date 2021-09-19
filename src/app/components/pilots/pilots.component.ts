@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { People } from 'src/app/models/People';
 import { PeopleService } from 'src/app/services/people.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -10,7 +11,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PilotsComponent implements OnInit {
 
-  public peopleId!: number;
+  modalRef!: BsModalRef;
+  public peopleName!: String;
+  public peopleMass!: String;
   public peoples: People[] = [];
   public peoplesFiltered: People[] = [];
   people = {} as People;
@@ -31,6 +34,7 @@ export class PilotsComponent implements OnInit {
   constructor(
      private peopleService: PeopleService,
      private toastr: ToastrService,
+     private modalService: BsModalService,
      private spinner: NgxSpinnerService,
   ) { }
 
@@ -53,13 +57,29 @@ export class PilotsComponent implements OnInit {
       (peoples: People[]) => {
         this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
+        this.toastr.success('Dados carregados', 'Sucesso!');
       },
       (error: any) => {
-        this.toastr.error('Erro ao carregar os Pilots', 'Erro!');
+        this.toastr.error('Erro ao carregar dados', 'Erro!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());
+  }
 
+  openModal(template: any, people: People): void {
+    // peopleName: string, peopleMass: string
+    console.log(people);
+    // this.peopleName = peopleName;
+    // this.peopleMass = peopleMass;
+    this.modalRef = this.modalService.show(template, people);
+  }
+
+  confirmPeople(): void {
+    this.modalRef.hide();
+  }
+
+  declinePeople(): void {
+    this.modalRef.hide();
   }
 
 }
