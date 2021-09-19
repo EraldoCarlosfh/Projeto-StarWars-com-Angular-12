@@ -21,6 +21,12 @@ public getStarship(): Observable<Starship[]> {
     .pipe(take(1));
 }
 
+public getStarshipPage(page: number): Observable<Starship[]> {
+  return this.http
+    .get<Starship[]>(`${environment.api + this.endpoint}/?page=${page}`)
+    .pipe(take(1));
+}
+
 public getStarshipById(id: number,): Observable<Starship> {
   return this.http
     .get<Starship>(`${environment.api + this.endpoint}/${id}`)

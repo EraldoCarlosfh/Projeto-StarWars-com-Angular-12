@@ -23,4 +23,7 @@
     </div>
   </div>
 
+  <button *ngIf="pagina >= 1 && pagina < 4" (click)="mudarPagina()" class="btn btn-primary mt-3">Próxima Página</button><br>
+  <button *ngIf="pagina > 1" (click)="mudarPagina2()" class="btn btn-primary mt-3">Próxima Anterior</button>
+
 </div>

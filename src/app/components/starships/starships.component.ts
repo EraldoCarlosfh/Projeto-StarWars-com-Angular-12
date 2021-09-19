@@ -17,6 +17,8 @@ export class StarshipsComponent implements OnInit {
   public starshipsFiltered: Starship[] = [];
   starship = {} as Starship;
 
+  public pagina = 1;
+
   private filtroListado = '';
 
   public get filtroLista(): string {
@@ -50,6 +52,18 @@ export class StarshipsComponent implements OnInit {
     );
   }
 
+  mudarPagina(): void {
+   this.pagina = this.pagina + 1;
+
+   console.log('Proxima', this.pagina);
+  }
+
+  mudarPagina2(): void {
+    this.pagina = this.pagina - 1;
+
+    console.log('Anterior', this.pagina);
+   }
+
   public GetAllStarship(): void {
     this.starshipService.getStarship().subscribe(
       (starships: any) => {
@@ -63,5 +77,20 @@ export class StarshipsComponent implements OnInit {
       }
     ).add(() => this.spinner.hide());
   }
+
+  public GetAllStarshipPage(page: number): void {
+    this.starshipService.getStarshipPage(this.pagina).subscribe(
+      (starships: any) => {
+        this.starships = starships.results;
+        this.starshipsFiltered = this.starships;
+        this.toastr.success('Dados carregados', 'Sucesso!');
+      },
+      (error: any) => {
+        this.toastr.error('Erro ao carregar dados', 'Erro!');
+        console.error(error);
+      }
+    ).add(() => this.spinner.hide());
+  }
+
 
 }
