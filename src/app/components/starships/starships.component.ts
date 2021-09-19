@@ -79,7 +79,7 @@ export class StarshipsComponent implements OnInit {
   }
 
   public GetAllStarshipPage(page: number): void {
-    this.starshipService.getStarshipPage(this.pagina).subscribe(
+    this.starshipService.getStarshipPage(page).subscribe(
       (starships: any) => {
         this.starships = starships.results;
         this.starshipsFiltered = this.starships;
