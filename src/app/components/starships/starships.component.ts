@@ -52,13 +52,13 @@ export class StarshipsComponent implements OnInit {
     );
   }
 
-  mudarPagina(): void {
+  proximaPagina(): void {
    this.pagina = this.pagina + 1;
 
    console.log('Proxima', this.pagina);
   }
 
-  mudarPagina2(): void {
+  paginaAnterior(): void {
     this.pagina = this.pagina - 1;
 
     console.log('Anterior', this.pagina);
