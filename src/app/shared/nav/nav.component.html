@@ -1,28 +1,25 @@
 <nav class="toolbar" role="banner" id="topo">
-  <div>
-    <a routerLink="/home">
-      <img width="80" alt="Logo Star Wars" src="../assets/StarWars.png"/>
-    </a>
-    <span>{{ title }}</span>
-  </div>
+    <div>
+      <a routerLink="/home">
+        <img width="80" alt="Logo Star Wars" src="../assets/StarWars.png" />
+      </a>
+      <span>{{ title }}</span>
+    </div>
 
-  <div>
-    <span style="font-size: 14px;">
-      {{today}}
-    </span>
-  </div>
-
-  <div>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home" [routerLinkActive]="'selected'"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/starships" [routerLinkActive]="'selected'"><i class="fab fa-galactic-senate"></i>&nbsp;&nbsp;Starships</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pilots" [routerLinkActive]="'selected'"><i class="fab fa-jedi-order"></i>&nbsp;&nbsp;Pilots</a>
-      </li>
-    </ul>
-  </div>
+    <div>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" [routerLinkActive]="'selected'"><i
+              class="fas fa-home"></i>&nbsp;&nbsp;Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/starships" [routerLinkActive]="'selected'"><i
+              class="fab fa-galactic-senate"></i>&nbsp;&nbsp;Starships</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/pilots" [routerLinkActive]="'selected'"><i
+              class="fab fa-jedi-order"></i>&nbsp;&nbsp;Pilots</a>
+        </li>
+      </ul>
+    </div>
 </nav>

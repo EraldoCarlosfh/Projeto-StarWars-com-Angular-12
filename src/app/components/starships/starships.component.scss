@@ -1,3 +1,12 @@
+
+#starwars {
+  display: flex;
+  height: 180px;
+  width: 280px;
+  margin: 82px auto 5px;
+  align-items: center;
+}
+
 .card-deck {
   display: flex;
 }
@@ -8,6 +17,24 @@
 
 .card:hover {
   border: 2px solid #F56F36 !important;
+}
+
+.btn {
+  color:#1F2738;
+  background-color: #EEEEEE !important;
+  border: #EEEEEE !important;
+}
+
+.btn:hover {
+  color:#EEEEEE;
+  background-color: #F56F36 !important;
+  border: #F56F36 !important;
+}
+
+.btn:focus {
+  color:#EEEEEE;
+  background-color: #F56F36 !important;
+  border: #F56F36 !important;
 }
 
 .card-footer {
@@ -33,8 +60,8 @@ small {
 }
 
 .card {
-  margin-right: 25px;
-  margin-top: 25px;
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
 #search {

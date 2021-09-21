@@ -21,6 +21,12 @@ export class PeopleService {
       .pipe(take(1));
   }
 
+  public getPeoplePage(page: number): Observable<People[]> {
+    return this.http
+      .get<People[]>(`${environment.api + this.endpoint}/?page=${page}`)
+      .pipe(take(1));
+  }
+
   public getPeopleById(id: number,): Observable<People> {
     return this.http
       .get<People>(`${environment.api + this.endpoint}/${id}`)

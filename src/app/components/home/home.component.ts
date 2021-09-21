@@ -15,12 +15,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  showMenu(): boolean {
-    return (
-      this.router.url != '/starships' &&
-      this.router.url != '/pilots' &&
-      this.router.url != '/pilotsdetails'
-    );
-  }
-
 }

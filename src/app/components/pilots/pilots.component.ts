@@ -20,6 +20,8 @@ export class PilotsComponent implements OnInit {
   public peoplesFiltered: People[] = [];
   people = {} as People;
 
+  public pagina = 1;
+
   public initial = 6;
   public viewButton = true;
   nameButton = 'ver mais';
@@ -85,9 +87,6 @@ export class PilotsComponent implements OnInit {
       (peoples: any) => {
         this.peoples = peoples.results;
         this.peoplesFiltered = this.peoples;
-        console.log("teste", peoples);
-        console.log("Filtrado", this.peoplesFiltered);
-        console.log("This", this.peoples);
 
         if (this.viewButton) {
           this.peoplesFiltered.length = this.initial;
@@ -109,7 +108,7 @@ export class PilotsComponent implements OnInit {
     let initialState = {
       people
     }
-    this.modalRef = this.modalService.show(ModalComponent, {class: 'modal-lg', initialState} );
+    this.modalRef = this.modalService.show(ModalComponent, {class: 'modal-sm', initialState} );
   }
 
   confirmPeople(): void {
@@ -118,6 +117,41 @@ export class PilotsComponent implements OnInit {
 
   declinePeople(): void {
     this.modalRef.hide();
+  }
+
+  mudarPagina(): void {
+    this.pagina++;
+    if (this.pagina > 9){
+        this.pagina = 1;
+    }
+   // console.log('Mais',this.pagina);
+  }
+
+  mudarPagina2(): void {
+    this.pagina--;
+    //console.log('Menos',this.pagina);
+  }
+
+  public GetAllPeoplePage(): void {
+    this.peopleService.getPeoplePage(this.pagina).subscribe(
+      (peoples: any) => {
+        this.peoples = peoples.results;
+        this.peoplesFiltered = this.peoples;
+
+        if (this.viewButton) {
+          this.peoplesFiltered.length = this.initial;
+          this.nameButton = 'Ver mais';
+        }else {
+          this.peoplesFiltered =  this.peoplesFiltered;
+          this.nameButton = 'Ver menos';
+        }
+        this.toastr.success('Dados carregados', 'Sucesso!');
+      },
+      (error: any) => {
+        this.toastr.error('Erro ao carregar dados', 'Erro!');
+        console.error(error);
+      }
+    ).add(() => this.spinner.hide());
   }
 
 }

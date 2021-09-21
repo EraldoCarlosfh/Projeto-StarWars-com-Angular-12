@@ -1,3 +1,12 @@
+
+#starwars {
+  display: flex;
+  height: 180px;
+  width: 280px;
+  margin: 82px auto 5px;
+  align-items: center;
+}
+
 .card-deck {
   display: flex;
 }
@@ -6,12 +15,26 @@
   border: 2px solid #1F2738 !important;
 }
 
-img:hover, .card-footer:hover {
-  background-color: #F56F36;
-}
-
 .card:hover {
   border: 2px solid #F56F36 !important;
+}
+
+.btn {
+  color:#1F2738;
+  background-color: #EEEEEE !important;
+  border: #EEEEEE !important;
+}
+
+.btn:hover {
+  color:#EEEEEE;
+  background-color: #F56F36 !important;
+  border: #F56F36 !important;
+}
+
+.btn:focus {
+  color:#EEEEEE;
+  background-color: #F56F36 !important;
+  border: #F56F36 !important;
 }
 
 .card-footer {
@@ -19,9 +42,9 @@ img:hover, .card-footer:hover {
   text-align: center;
 }
 
-// .card-footer:hover {
-//   background-color: #F56F36;
-// }
+.card-footer:hover {
+  background-color: #F56F36;
+}
 
 small {
   color: rgb(221, 221, 221) !important;
@@ -37,8 +60,8 @@ small {
 }
 
 .card {
-  margin-right: 25px;
-  margin-top: 25px;
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
 #search {

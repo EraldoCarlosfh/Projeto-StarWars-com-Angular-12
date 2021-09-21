@@ -1,6 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { StarshipsService } from 'src/app/services/starships.service';
 import { Starship } from 'src/app/models/Starship';
@@ -35,13 +35,13 @@ export class StarshipsComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private starshipService: StarshipsService,
-    private modalService: BsModalService,
     private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
     this.spinner.show();
-     this.GetAllStarship();
+    this.GetAllStarship();
+    //console.log('Inicial',this.pagina);
   }
 
   public filterStarships(filtrarPor: string): Starship[] {
@@ -51,18 +51,6 @@ export class StarshipsComponent implements OnInit {
       starships.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
-
-  proximaPagina(): void {
-   this.pagina = this.pagina + 1;
-
-   console.log('Proxima', this.pagina);
-  }
-
-  paginaAnterior(): void {
-    this.pagina = this.pagina - 1;
-
-    console.log('Anterior', this.pagina);
-   }
 
   public GetAllStarship(): void {
     this.starshipService.getStarship().subscribe(
@@ -78,12 +66,26 @@ export class StarshipsComponent implements OnInit {
     ).add(() => this.spinner.hide());
   }
 
-  public GetAllStarshipPage(page: number): void {
-    this.starshipService.getStarshipPage(page).subscribe(
+  mudarPagina(): void {
+    this.pagina++;
+    if (this.pagina > 4){
+        this.pagina = 1;
+    }
+   // console.log('Mais',this.pagina);
+  }
+
+  mudarPagina2(): void {
+    this.pagina--;
+    //console.log('Menos',this.pagina);
+  }
+
+  public GetAllStarshipPage(): void {
+    this.starshipService.getStarshipPage(this.pagina).subscribe(
       (starships: any) => {
         this.starships = starships.results;
         this.starshipsFiltered = this.starships;
         this.toastr.success('Dados carregados', 'Sucesso!');
+
       },
       (error: any) => {
         this.toastr.error('Erro ao carregar dados', 'Erro!');
@@ -91,6 +93,5 @@ export class StarshipsComponent implements OnInit {
       }
     ).add(() => this.spinner.hide());
   }
-
 
 }

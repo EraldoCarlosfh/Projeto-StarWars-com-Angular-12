@@ -1,5 +1,9 @@
-<app-home></app-home>
 <div class="container">
+
+  <div class="">
+    <img src="../assets/StarWars3.png" id="starwars" alt="">
+  </div>
+
   <div class="title">
     <p>Pilots</p>
   </div>
@@ -7,7 +11,7 @@
   <div class="d-flex mb-3">
     <div class="flex-fill pr-3">
       <div class="input-group mb-2">
-        <input type="search" class="form-control" placeholder="Filtrar por Nome" [(ngModel)]="filtroLista" id="search">
+        <input type="search" class="form-control" placeholder="Filtrar por Nome ou Idade" [(ngModel)]="filtroLista" id="search">
       </div>
     </div>
   </div>
@@ -24,6 +28,12 @@
     </div>
   </div>
 
-  <button (click)="viewButton = !viewButton" (click)="loading()" class="btn btn-primary mt-3">{{nameButton}}</button>
+  <button style="font-weight: 600;" (click)="viewButton = !viewButton" (click)="loading()" class="btn mt-3">{{nameButton}}</button>
+  <div class="d-flex justify-content-between">
+    <button *ngIf="pagina >= 0" (click)="mudarPagina()" (click)="GetAllPeoplePage()" style="font-weight: 600;"
+      class="btn mt-3">Próxima</button><br>
+    <button *ngIf="pagina > 0" (click)="mudarPagina2()" (click)="GetAllPeoplePage()" style="font-weight: 600;"
+      class="btn mt-3">Anterior</button>
+  </div>
 
 </div>
