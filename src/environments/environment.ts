@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'https://swapi.dev/api/'
+  api: 'https://apirest-starwars.herokuapp.com/api/'
 };
 
 /*
