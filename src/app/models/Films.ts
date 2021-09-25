@@ -4,6 +4,5 @@ export interface Films {
 
   id: number;
   title: string;
-  episode_id: number;
-  starship: Starship[];
+  episode: number;
 }

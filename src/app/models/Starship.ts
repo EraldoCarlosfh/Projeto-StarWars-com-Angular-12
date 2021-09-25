@@ -4,5 +4,6 @@ export interface Starship {
 
   id: number;
   name: string;
-  films: Films[];
+  size: number;
+  passengers: number;
 }

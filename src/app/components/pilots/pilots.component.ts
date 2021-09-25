@@ -14,7 +14,7 @@ export class PilotsComponent implements OnInit {
 
   modalRef!: BsModalRef;
   public peopleName!: String;
-  public peopleMass!: String;
+  public peopleage!: String;
   public peopleFilms: People[] = [];
   public peoples: People[] = [];
   public peoplesFiltered: People[] = [];
@@ -54,9 +54,9 @@ export class PilotsComponent implements OnInit {
   public filterPeoples(filtrarPor: string): People[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.peoples.filter(
-      (peoples: { name: string; mass: string }) =>
+      (peoples: { name: string; age: string }) =>
       peoples.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-      peoples.mass.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      peoples.age.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 

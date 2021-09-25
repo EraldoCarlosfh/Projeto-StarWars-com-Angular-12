@@ -6,7 +6,7 @@ export interface People {
 
   id: number;
   name: string;
-  mass: string;
-  films: Films[];
-  starship: Starship[];
+  age: string;
+  height: number;
+  gender: string;
 }
