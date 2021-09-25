@@ -85,7 +85,7 @@ export class PilotsComponent implements OnInit {
   public GetAllPeople(): void {
     this.peopleService.getPeople().subscribe(
       (peoples: any) => {
-        this.peoples = peoples.results;
+        this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
 
         if (this.viewButton) {
@@ -135,7 +135,7 @@ export class PilotsComponent implements OnInit {
   public GetAllPeoplePage(): void {
     this.peopleService.getPeoplePage(this.pagina).subscribe(
       (peoples: any) => {
-        this.peoples = peoples.results;
+        this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
 
         if (this.viewButton) {

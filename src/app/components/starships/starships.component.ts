@@ -55,7 +55,7 @@ export class StarshipsComponent implements OnInit {
   public GetAllStarship(): void {
     this.starshipService.getStarship().subscribe(
       (starships: any) => {
-        this.starships = starships.results;
+        this.starships = starships;
         this.starshipsFiltered = this.starships;
         this.toastr.success('Dados carregados', 'Sucesso!');
       },
@@ -82,7 +82,7 @@ export class StarshipsComponent implements OnInit {
   public GetAllStarshipPage(): void {
     this.starshipService.getStarshipPage(this.pagina).subscribe(
       (starships: any) => {
-        this.starships = starships.results;
+        this.starships = starships;
         this.starshipsFiltered = this.starships;
         this.toastr.success('Dados carregados', 'Sucesso!');
 
