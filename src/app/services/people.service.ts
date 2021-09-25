@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 
 export class PeopleService {
 
-  public endpoint = 'people';
+  public endpoint = 'pilots';
 
   constructor(
     private http: HttpClient
