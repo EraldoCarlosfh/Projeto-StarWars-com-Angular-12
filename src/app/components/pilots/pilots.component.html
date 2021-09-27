@@ -15,25 +15,55 @@
       </div>
     </div>
   </div>
+  <div class="col-md-2 d-flex">
+    <a class="d-flex btn btn-outline-primary" (click)="openModalAddPilot(templateAdd)">
+      <!--href="#" -->
+      <i class="fa fa-plus-circle my-1"></i>
+      <b class="ml-1 d-none d-sm-block">Add Pilot</b>
+    </a>
+  </div>
+  <div *ngIf="peoples.length === 0" class="d-flex justify-content-center" style="color:white; font-size: 20px">
+    There are no registered pilots...
+  </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div *ngIf="peoples.length > 0" class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" *ngFor="let people of peoplesFiltered" style="cursor: pointer;">
       <a (click)="openModal(people)"><div class="card">
         <img src="../assets/unnamed.jpg" class="card-img-top" alt="...">
-        <div class="card-footer">
-          <small class="text-muted">{{people.name}}</small>
+        <div class="card-footer d-flex justify-content-between">
+          <small class="">{{people.name}}
+          </small>
+          <div class="d-flex align-items-center"><i class="fa fa-trash" tooltip="Excluir" (click)="openModalDelete($event, templateDelete, people.id)"></i>
+            &nbsp;&nbsp;<i class="{{'fa fa-edit'}}" tooltip="Editar" (click)="openModalEdit($event, templateEdit, people.id)"></i></div>
         </div>
       </div>
     </a>
     </div>
   </div>
 
-  <button style="font-weight: 600;" (click)="viewButton = !viewButton" (click)="loading()" class="btn mt-3">{{nameButton}}</button>
-  <div class="d-flex justify-content-between">
-    <button *ngIf="pagina >= 0" (click)="mudarPagina()" (click)="GetAllPeoplePage()" style="font-weight: 600;"
-      class="btn mt-3">Próxima</button><br>
-    <button *ngIf="pagina > 0" (click)="mudarPagina2()" (click)="GetAllPeoplePage()" style="font-weight: 600;"
-      class="btn mt-3">Anterior</button>
-  </div>
-
+  <button *ngIf="peoples.length > 0" style="font-weight: 600;" (click)="viewButton = !viewButton" (click)="loading()" class="btn mt-3">{{nameButton}}</button>
 </div>
+
+<ng-template #templateAdd>
+  <div class="modal-body text-center">
+    <p>Want to add a new Pilot?</p>
+    <button type="button" class="btn btn-default" routerLink="/pilots/detail" (click)="confirmAddPilot()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="declinePilot()">No</button>
+  </div>
+</ng-template>
+
+<ng-template #templateDelete>
+  <div class="modal-body text-center">
+    <p>Are you sure you want to delete the Code Pilot: {{this.people.id}}?</p>
+    <button type="button" class="btn btn-default" (click)="confirmDeletePilot()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeletePilot()">No</button>
+  </div>
+</ng-template>
+
+<ng-template #templateEdit>
+  <div class="modal-body text-center">
+    <p>You want to edit the code Pilot: {{this.peopleId}}?</p>
+    <button type="button" class="btn btn-default" (click)="detalheEditPilot(this.peopleId)" (click)="confirmEditPilot()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="declineEditPilot()">No</button>
+  </div>
+</ng-template>

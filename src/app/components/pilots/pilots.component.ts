@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { People } from 'src/app/models/People';
 import { PeopleService } from 'src/app/services/people.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-pilots',
   templateUrl: './pilots.component.html',
@@ -13,6 +14,7 @@ import { ModalComponent } from 'src/app/shared/modal/modal.component';
 export class PilotsComponent implements OnInit {
 
   modalRef!: BsModalRef;
+  public peopleId!: number;
   public peopleName!: String;
   public peopleage!: String;
   public peopleFilms: People[] = [];
@@ -22,9 +24,8 @@ export class PilotsComponent implements OnInit {
 
   public pagina = 1;
 
-  public initial = 6;
   public viewButton = true;
-  nameButton = 'ver mais';
+  public nameButton = '';
 
   private filtroListado = '';
 
@@ -35,7 +36,7 @@ export class PilotsComponent implements OnInit {
   public set filtroLista(value: string) {
     this.filtroListado = value;
     this.peoplesFiltered = this.filtroLista
-      ? this.filterPeoples(this.filtroLista)
+      ? this.filterPilots(this.filtroLista)
       : this.peoples;
   }
 
@@ -44,62 +45,53 @@ export class PilotsComponent implements OnInit {
      private toastr: ToastrService,
      private modalService: BsModalService,
      private spinner: NgxSpinnerService,
+     private router: Router
   ) { }
 
   ngOnInit(): void {
      this.spinner.show();
-     this.GetAllPeople();
+     this.GetAllPilot();
   }
 
-  public filterPeoples(filtrarPor: string): People[] {
+  public filterPilots(filtrarPor: string): People[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.peoples.filter(
-      (peoples: { name: string; age: string }) =>
-      peoples.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-      peoples.age.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      (peoples: { name: string }) =>
+      peoples.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
 
   public loading(): void {
-    // if (this.viewButton) {
-    //   this.peoplesFiltered.length = this.initial;
-    //   this.nameButton = 'Ver mais';
-    // }else {
-    //   this.peoplesFiltered =  this.peoplesFiltered;
-    //   this.nameButton = 'Ver menos';
-    // }
-    this.GetAllPeople();
+    if (this.viewButton) {
+      var viewMore = this.peoplesFiltered.slice(0,6);
+      this.peoplesFiltered = viewMore;
+      this.nameButton = 'View More';
+    }else {
+      if (this.peoples.length > 6) {
+      this.peoplesFiltered = this.peoples;
+      this.nameButton = 'View Less';
+    }else{
+      this.toastr.error(`Existem somente: ${this.peoplesFiltered.length} pilots registrados. `, `Erro!`);
+    }
+    }
   }
 
-
-  // public loading():void {
-  //   if (this.viewButton) {
-  //     this.peoplesFiltered.length = this.initial;
-  //     this.nameButton = 'Ver mais';
-  //   }else {
-  //     this.peoplesFiltered.length = 10;
-  //     this.nameButton = 'Ver menos';
-  //   }
-  // }
-
-  public GetAllPeople(): void {
-    this.peopleService.getPeople().subscribe(
+  public GetAllPilot(): void {
+    this.peopleService.getAllPilot().subscribe(
       (peoples: any) => {
         this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
-
-        if (this.viewButton) {
-          this.peoplesFiltered.length = this.initial;
-          this.nameButton = 'Ver mais';
-        }else {
-          this.peoplesFiltered =  this.peoplesFiltered;
-          this.nameButton = 'Ver menos';
-        }
+        this.loading();
         this.toastr.success('Dados carregados', 'Sucesso!');
       },
       (error: any) => {
-        this.toastr.error('Erro ao carregar dados', 'Erro!');
-        console.error(error);
+        if (this.peoples.length === 0) {
+          this.toastr.error('Sem Pilotos cadastrados.', 'Erro!');
+        }
+        if (this.peoples.length != 0){
+         this.toastr.error('Erro ao carregar dados', 'Erro!');
+         console.error(error);
+      }
       }
     ).add(() => this.spinner.hide());
   }
@@ -111,12 +103,68 @@ export class PilotsComponent implements OnInit {
     this.modalRef = this.modalService.show(ModalComponent, {class: 'modal-sm', initialState} );
   }
 
-  confirmPeople(): void {
+  openModalAddPilot(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  openModalDelete(event: any, template: TemplateRef<any>, peopleId: number): void {
+    console.log(template);
+    event.stopPropagation();
+    this.peopleId = peopleId;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  openModalEdit(event: any, template: TemplateRef<any>, peopleId: number): void {
+    console.log(template);
+    event.stopPropagation();
+    this.peopleId = peopleId;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirmAddPilot(): void {
     this.modalRef.hide();
   }
 
-  declinePeople(): void {
+  declinePilot(): void {
     this.modalRef.hide();
+  }
+
+  detalheEditPilot(id: number): void {
+    this.router.navigate([`/pilots/detail/${id}`]);
+  }
+
+  confirmEditPilot(): void {
+    this.modalRef.hide();
+    this.toastr.success('Você será redirecionado.', 'Aguarde!');
+  }
+
+  declineEditPilot(): void {
+    this.modalRef.hide();
+  }
+
+  declineDeletePilot(): void {
+    this.modalRef.hide();
+  }
+
+  confirmDeletePilot(): void {
+    this.modalRef.hide();
+    this.spinner.show();
+    this.peopleService.deletePilotById(this.peopleId).subscribe(
+      () => {
+        var namePilot = '';
+        this.peoples.forEach(x => {
+          namePilot = x.name;
+        });
+
+          this.toastr.success(`O Piloto ${namePilot} foi deletado com sucesso`, 'Sucesso!');
+          window.location.reload();
+      },
+      (error: any) => {
+        this.toastr.error(`Erro ao tentar deletar o Piloto ${this.peopleId}`, 'Erro!');
+        console.error(error);
+      }
+    ).add(() => this.spinner.hide());
+
   }
 
   mudarPagina(): void {
@@ -132,17 +180,18 @@ export class PilotsComponent implements OnInit {
     //console.log('Menos',this.pagina);
   }
 
-  public GetAllPeoplePage(): void {
-    this.peopleService.getPeoplePage(this.pagina).subscribe(
+  public GetAllPilotPage(): void {
+    this.peopleService.getPilotPage(this.pagina).subscribe(
       (peoples: any) => {
         this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
 
         if (this.viewButton) {
-          this.peoplesFiltered.length = this.initial;
+          var verMais = this.peoplesFiltered.slice(0,6);
+          this.peoplesFiltered = verMais;
           this.nameButton = 'Ver mais';
         }else {
-          this.peoplesFiltered =  this.peoplesFiltered;
+          this.peoplesFiltered =  this.peoples;
           this.nameButton = 'Ver menos';
         }
         this.toastr.success('Dados carregados', 'Sucesso!');

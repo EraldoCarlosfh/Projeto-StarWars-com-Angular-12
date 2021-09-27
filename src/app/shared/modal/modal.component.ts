@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit {
    }
 
    filtroUrl(): string {
-    this.filmesFiltered = this.people.films.name;
+    this.filmesFiltered = this.people;
     return this.filmesFiltered;
    }
 

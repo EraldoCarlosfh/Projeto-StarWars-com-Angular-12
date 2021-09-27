@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,14 +17,15 @@ import { FooterComponent } from './shared/footer/footer.component';
   declarations: [
       AppComponent,
       NavComponent,
-      FooterComponent,
+      FooterComponent
    ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     CollapseModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressAnimation: 'increasing',

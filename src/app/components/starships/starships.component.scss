@@ -16,7 +16,7 @@
 }
 
 .card:hover {
-  border: 2px solid #F56F36 !important;
+  border: 2px solid #facc00 !important;
 }
 
 .btn {
@@ -27,27 +27,25 @@
 
 .btn:hover {
   color:#EEEEEE;
-  background-color: #F56F36 !important;
-  border: #F56F36 !important;
+  background-color: #facc00 !important;
+  border: #facc00 !important;
 }
 
 .btn:focus {
   color:#EEEEEE;
-  background-color: #F56F36 !important;
-  border: #F56F36 !important;
+  background-color: #facc00 !important;
+  border: #facc00 !important;
 }
 
 .card-footer {
+  color: #EEE !important;
   background-color: #1F2738;
   text-align: center;
 }
 
 .card-footer:hover {
-  background-color: #F56F36;
-}
-
-small {
-  color: rgb(221, 221, 221) !important;
+  color: #1F2738 !important;
+  background-color: #facc00;
 }
 
 .title {

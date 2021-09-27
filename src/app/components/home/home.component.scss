@@ -16,8 +16,8 @@
 .card {
   all: unset;
   border-radius: 40px;
-  border: 1px solid #F56F36;
-  background-color: #EEEEEE;
+  border: 2px solid #1F2738;
+  background-color: #facc00;
   height: 40px;
   width: 200px;
   margin: 0 8px 16px;
@@ -31,8 +31,9 @@
 }
 
 .card:hover {
-  border: 1px solid #EEEEEE;
-  background-color: #F56F36;
+  color: #EEE;
+  border: 2px solid #EEE;
+  background-color: #facc00;
 }
 
 .card-container .card:not(:last-child) {
@@ -60,12 +61,12 @@
 a,
 a:visited,
 a:hover {
-  color: #F56F36;
+  color: #1F2738;
   text-decoration: none;
 }
 
 a:hover {
-  color: #1F2738;
+  color: #facc00;
 }
 
 p {
