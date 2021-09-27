@@ -110,7 +110,7 @@ export class PilotDetailComponent implements OnInit {
           (pilotRetorno: People) => {
             // (pilotRetorno: People) => {
             this.toastr.success(`Pilot: ${this.pilot.name} salvo com sucesso.`, 'Sucesso!');
-            this.router.navigate([`pilots/detail/${pilotRetorno.id}`]);
+            //this.router.navigate([`pilots/detail/${pilotRetorno.id}`]);
             // this.router.navigate([`pilots/detail/${pilotRetorno.id}`]);
             this.resetForm();
           },
