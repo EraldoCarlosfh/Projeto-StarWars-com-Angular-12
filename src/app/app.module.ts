@@ -12,12 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { PeopleService } from './services/people.service';
+import { StarshipsService } from './services/starships.service';
 
 @NgModule({
   declarations: [
       AppComponent,
       NavComponent,
-      FooterComponent
+      FooterComponent,
    ],
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [ ],
+  providers: [PeopleService, StarshipsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

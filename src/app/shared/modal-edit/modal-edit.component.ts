@@ -1,24 +1,17 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { People } from 'src/app/models/People';
 import { PeopleService } from 'src/app/services/people.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-pilot-detail',
-  templateUrl: './pilot-detail.component.html',
-  styleUrls: ['./pilot-detail.component.scss'],
+  selector: 'app-modal-edit',
+  templateUrl: './modal-edit.component.html',
+  styleUrls: ['./modal-edit.component.scss']
 })
-export class PilotDetailComponent implements OnInit {
+export class ModalEditComponent implements OnInit {
 
   modalRef!: BsModalRef;
   peopleId!: number;
@@ -31,16 +24,34 @@ export class PilotDetailComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private activatedRouter: ActivatedRoute,
     private peopleService: PeopleService,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private router: Router
   ) {}
 
+  public carregarPilot(): void {
+    if (this.peopleId !== null && this.peopleId !== 0) {
+      this.spinner.show();
+
+      this.peopleService
+        .getPilotById(this.peopleId)
+        .subscribe(
+          (pilot: People) => {
+            this.pilot = { ...pilot };
+            this.form.patchValue(this.pilot);
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao tentar carregar Piloto.', 'Erro!');
+            console.error(error);
+          }
+        )
+        .add(() => this.spinner.hide());
+    }
+  }
 
   ngOnInit(): void {
+    this.carregarPilot();
     this.validation();
   }
 
@@ -68,31 +79,30 @@ export class PilotDetailComponent implements OnInit {
   }
 
   public resetForm(): void {
-    this.form.reset();
+    //this.form.reset();
+    window.location.reload();
   }
 
   public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
 
-  savePilot(template: any): void {
+  savePilot(): void {
     this.spinner.show();
     if (this.form.valid) {
 
       this.pilot = { ...this.form.value };
       this.peopleService
-        .postPilot(this.pilot)
+        .putPilot(this.pilot)
         .subscribe(
-          () => {
-            this.toastr.success(`Pilot: ${this.pilot.name} salvo com sucesso.`, 'Sucesso!');
-            this.resetForm();
-          },
+          () =>
+            this.toastr.success(`Piloto: ${this.pilot.name} atualizado com sucesso.`, 'Sucesso!'),
           (error: any) => {
             this.toastr.error(`Pilot: ${this.pilot.name} não foi salvo`, 'Erro!');
             console.error(error);
           }
         ).add(() => this.spinner.hide());
-      this.openModal(template);
+      window.location.reload();
     }
   }
 
@@ -100,11 +110,4 @@ export class PilotDetailComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
-  confirm(): void {
-    this.modalRef.hide();
-  }
-
-  decline(): void {
-    this.modalRef.hide();
-  }
 }

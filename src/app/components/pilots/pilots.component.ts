@@ -6,6 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { Router } from '@angular/router';
+import { PilotDetailComponent } from './pilot-detail/pilot-detail.component';
+import { ModalEditComponent } from 'src/app/shared/modal-edit/modal-edit.component';
 @Component({
   selector: 'app-pilots',
   templateUrl: './pilots.component.html',
@@ -27,16 +29,16 @@ export class PilotsComponent implements OnInit {
   public viewButton = true;
   public nameButton = '';
 
-  private filtroListado = '';
+  private listedFilter = '';
 
-  public get filtroLista(): string {
-    return this.filtroListado;
+  public get filterList(): string {
+    return this.listedFilter;
   }
 
-  public set filtroLista(value: string) {
-    this.filtroListado = value;
-    this.peoplesFiltered = this.filtroLista
-      ? this.filterPilots(this.filtroLista)
+  public set filterList(value: string) {
+    this.listedFilter = value;
+    this.peoplesFiltered = this.filterList
+      ? this.filterPilots(this.filterList)
       : this.peoples;
   }
 
@@ -53,12 +55,13 @@ export class PilotsComponent implements OnInit {
      this.GetAllPilot();
   }
 
-  public filterPilots(filtrarPor: string): People[] {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
+  public filterPilots(filterBy: string): People[] {
+    filterBy = filterBy.toLocaleLowerCase();
     return this.peoples.filter(
       (peoples: { name: string }) =>
-      peoples.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      peoples.name.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
+
   }
 
   public loading(): void {
@@ -82,7 +85,11 @@ export class PilotsComponent implements OnInit {
         this.peoples = peoples;
         this.peoplesFiltered = this.peoples;
         this.loading();
+        if (this.peoples.length === 0) {
+          this.toastr.error('Sem Pilotos cadastrados.', 'Erro!');
+        }else{
         this.toastr.success('Dados carregados', 'Sucesso!');
+      }
       },
       (error: any) => {
         if (this.peoples.length === 0) {
@@ -107,9 +114,10 @@ export class PilotsComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
-  openModalDelete(event: any, template: TemplateRef<any>, peopleId: number): void {
+  openModalDelete(event: any, template: TemplateRef<any>, peopleName: string, peopleId: number): void {
     console.log(template);
     event.stopPropagation();
+    this.peopleName = peopleName;
     this.peopleId = peopleId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
@@ -129,9 +137,14 @@ export class PilotsComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  detalheEditPilot(id: number): void {
-    this.router.navigate([`/pilots/detail/${id}`]);
-  }
+  detalheEditPilot(): void {
+    var peopleId: number;
+    peopleId = this.peopleId;
+      let initialState = {
+        peopleId
+      }
+      this.modalRef = this.modalService.show(ModalEditComponent, {class: 'modal-dialog-centered', initialState});
+    }
 
   confirmEditPilot(): void {
     this.modalRef.hide();
@@ -160,7 +173,7 @@ export class PilotsComponent implements OnInit {
           window.location.reload();
       },
       (error: any) => {
-        this.toastr.error(`Erro ao tentar deletar o Piloto ${this.peopleId}`, 'Erro!');
+        this.toastr.error(`Erro ao tentar deletar o Piloto ${this.peopleName}`, 'Erro!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());

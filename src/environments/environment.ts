@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://apirest-starwars.herokuapp.com/api/'
-  //api: 'https://localhost:8080/api/',
+  //api: 'https://apirest-starwars.herokuapp.com/api/'
+  api: 'http://localhost:8080/api/',
 };
 
 /*

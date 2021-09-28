@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class StarshipsService {
 
   public endpoint = 'starships';
-  public endpoint2 = 'starship';
+  public endpoint2 = 'starship/';
 
 constructor(
   private http: HttpClient
@@ -24,13 +24,13 @@ public getStarship(): Observable<Starship[]> {
 
 public getStarshipPage(page: number): Observable<Starship[]> {
   return this.http
-    .get<Starship[]>(`${environment.api + this.endpoint}/?page=${page}`)
+    .get<Starship[]>(`${environment.api + this.endpoint2}?page=${page}`)
     .pipe(take(1));
 }
 
 public getStarshipById(id: number,): Observable<Starship> {
   return this.http
-    .get<Starship>(`${environment.api + this.endpoint}/${id}`)
+    .get<Starship>(`${environment.api + this.endpoint2}${id}`)
     .pipe(take(1));
 }
 public postStarship(starship: Starship): Observable<Starship> {
@@ -53,7 +53,7 @@ public deleteStarship(starship: Starship): Observable<any> {
 
 public deleteStarshipById(id: number): Observable<any> {
   return this.http
-    .delete(`${environment.api + 'delete/starship/'}${id}`)
+    .delete(`${environment.api + 'delete/' + this.endpoint2}${id}`)
     .pipe(take(1));
 }
 

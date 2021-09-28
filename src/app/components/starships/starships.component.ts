@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { StarshipsService } from 'src/app/services/starships.service';
 import { Starship } from 'src/app/models/Starship';
+import { ModalEditStarshipComponent } from 'src/app/shared/modal-edit-starship/modal-edit-starship.component';
 
 @Component({
   selector: 'app-starships',
@@ -14,6 +15,7 @@ export class StarshipsComponent implements OnInit {
 
   modalRef!: BsModalRef;
   public starshipId!: number;
+  public starshipName!: string;
   public starships: Starship[] = [];
   public starshipsFiltered: Starship[] = [];
   starship = {} as Starship;
@@ -23,16 +25,16 @@ export class StarshipsComponent implements OnInit {
   public viewButton = true;
   public nameButton = '';
 
-  private filtroListado = '';
+  private listedFilter = '';
 
-  public get filtroLista(): string {
-    return this.filtroListado;
+  public get filterList(): string {
+    return this.listedFilter;
   }
 
-  public set filtroLista(value: string) {
-    this.filtroListado = value;
-    this.starshipsFiltered = this.filtroLista
-      ? this.filterStarships(this.filtroLista)
+  public set filterList(value: string) {
+    this.listedFilter = value;
+    this.starshipsFiltered = this.filterList
+      ? this.filterStarships(this.filterList)
       : this.starships;
   }
 
@@ -49,11 +51,11 @@ export class StarshipsComponent implements OnInit {
     //console.log('Inicial',this.pagina);
   }
 
-  public filterStarships(filtrarPor: string): Starship[] {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
+  public filterStarships(filterBy: string): Starship[] {
+    filterBy = filterBy.toLocaleLowerCase();
     return this.starships.filter(
       (starships: { name: string}) =>
-      starships.name.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      starships.name.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
   }
 
@@ -64,33 +66,31 @@ export class StarshipsComponent implements OnInit {
         this.starshipsFiltered = this.starships;
         this.loading();
 
-        this.toastr.success('Dados carregados', 'Sucesso!');
-      },
-      (error: any) => {
-
         if (this.starships.length === 0) {
           this.toastr.error('Sem Starships cadastradas.', 'Erro!');
-        }
-        if (this.starships.length != 0){
+        }else {
+        this.toastr.success('Dados carregados', 'Sucesso!');
+      }
+      },
+      (error: any) => {
           this.toastr.error('Erro ao carregar dados', 'Erro!');
           console.error(error);
-      }
       }
     ).add(() => this.spinner.hide());
   }
 
-  mudarPagina(): void {
-    this.pagina++;
-    if (this.pagina > 4){
-        this.pagina = 1;
-    }
-   // console.log('Mais',this.pagina);
-  }
+  // mudarPagina(): void {
+  //   this.pagina++;
+  //   if (this.pagina > 4){
+  //       this.pagina = 1;
+  //   }
+  //  console.log('Mais',this.pagina);
+  // }
 
-  mudarPagina2(): void {
-    this.pagina--;
-    //console.log('Menos',this.pagina);
-  }
+  // mudarPagina2(): void {
+  //   this.pagina--;
+  //   console.log('Menos',this.pagina);
+  // }
 
   public loading(): void {
     if (this.viewButton) {
@@ -125,10 +125,11 @@ export class StarshipsComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
-  openModalDelete(event: any, template: TemplateRef<any>, starshipId: number): void {
+  openModalDelete(event: any, template: TemplateRef<any>, starshipId: number, starshipName: string): void {
     console.log(template);
     event.stopPropagation();
     this.starshipId = starshipId;
+    this.starshipName = starshipName;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
@@ -158,11 +159,36 @@ export class StarshipsComponent implements OnInit {
           window.location.reload();
       },
       (error: any) => {
-        this.toastr.error(`Erro ao tentar deletar a Starship ${this.starshipId}`, 'Erro!');
+        this.toastr.error(`Erro ao tentar deletar a Starship ${this.starshipName}`, 'Erro!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());
 
   }
+
+  openModalEdit(event: any, template: TemplateRef<any>, starshipId: number): void {
+    console.log(template);
+    event.stopPropagation();
+    this.starshipId = starshipId;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  detalheEditStarship(): void {
+    var starshipId: number;
+    starshipId = this.starshipId;
+      let initialState = {
+        starshipId
+      }
+      this.modalRef = this.modalService.show(ModalEditStarshipComponent, {class: 'modal-dialog-centered', initialState});
+    }
+
+    confirmEditStarship(): void {
+      this.modalRef.hide();
+      this.toastr.success('Você será redirecionado.', 'Aguarde!');
+    }
+
+    declineEditStarship(): void {
+      this.modalRef.hide();
+    }
 
 }

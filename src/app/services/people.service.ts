@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class PeopleService {
 
   public endpoint = 'pilots';
-   public endpoint2 = 'pilot';
+   public endpoint2 = 'pilot/';
 
   constructor(
     private http: HttpClient
@@ -24,13 +24,13 @@ export class PeopleService {
 
   public getPilotPage(page: number): Observable<People[]> {
     return this.http
-      .get<People[]>(`${environment.api + this.endpoint}/?page=${page}`)
+      .get<People[]>(`${environment.api + this.endpoint}?page=${page}`)
       .pipe(take(1));
   }
 
   public getPilotById(id: number,): Observable<People> {
     return this.http
-      .get<People>(`${environment.api + this.endpoint2}/${id}`)
+      .get<People>(`${environment.api + this.endpoint2}${id}`)
       .pipe(take(1));
   }
 
@@ -48,13 +48,13 @@ export class PeopleService {
 
   public deletePilot(pilot: People): Observable<any> {
     return this.http
-      .delete(`${environment.api + 'delete/'}${pilot}`)
+      .delete<People>(environment.api + 'delete/' + this.endpoint2 + pilot)
       .pipe(take(1));
   }
 
   public deletePilotById(id: number): Observable<People> {
     return this.http
-      .delete<People>(`${environment.api + 'delete/pilot/'}${id}`)
+      .delete<People>(`${environment.api + 'delete/' + this.endpoint2}${id}`)
       .pipe(take(1));
   }
 

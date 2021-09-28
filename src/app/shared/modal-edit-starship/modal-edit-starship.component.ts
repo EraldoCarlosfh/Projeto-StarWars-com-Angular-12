@@ -13,11 +13,11 @@ import { StarshipsService } from 'src/app/services/starships.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-starship-detail',
-  templateUrl: './starship-detail.component.html',
-  styleUrls: ['./starship-detail.component.scss']
+  selector: 'app-modal-edit-starship',
+  templateUrl: './modal-edit-starship.component.html',
+  styleUrls: ['./modal-edit-starship.component.scss']
 })
-export class StarshipDetailComponent implements OnInit {
+export class ModalEditStarshipComponent implements OnInit {
 
   modalRef!: BsModalRef;
   starshipId!: number;
@@ -37,8 +37,28 @@ export class StarshipDetailComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) { }
 
+  public carregarStarship(): void {
+    if (this.starshipId !== null && this.starshipId !== 0) {
+      this.spinner.show();
+
+      this.starshipService
+        .getStarshipById(this.starshipId)
+        .subscribe(
+          (starship: Starship) => {
+            this.starship = { ...starship };
+            this.form.patchValue(this.starship);
+          },
+          (error: any) => {
+            this.toastr.error('Erro ao tentar carregar Piloto.', 'Erro!');
+            console.error(error);
+          }
+        )
+        .add(() => this.spinner.hide());
+    }
+  }
 
   ngOnInit(): void {
+    this.carregarStarship();
     this.validation();
   }
 
@@ -65,42 +85,34 @@ export class StarshipDetailComponent implements OnInit {
   }
 
   public resetForm(): void {
-    this.form.reset();
+    window.location.reload();
   }
 
   public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
 
-  saveStarship(template: any): void {
+  saveStarship(): void {
     this.spinner.show();
     if (this.form.valid) {
 
-        this.starship = { ...this.form.value };
-        this.starshipService.postStarship(this.starship).subscribe(
-            () => {
-              this.toastr.success(`Starship: ${this.starship.name} salva com sucesso.`, 'Sucesso!');
-              this.resetForm();
-            },
-            (error: any) => {
-              this.toastr.error(`Starship: ${this.starship.name} não foi salva`, 'Erro!');
-              console.error(error);
-            }
-          ).add(() => this.spinner.hide());
-          this.openModal(template);
+      this.starship = { ...this.form.value };
+      this.starshipService
+        .putStarship(this.starship)
+        .subscribe(
+          () =>
+            this.toastr.success(`Starship: ${this.starship.name} atualizado com sucesso.`, 'Sucesso!'),
+          (error: any) => {
+            this.toastr.error(`Starship: ${this.starship.name} não foi salvo`, 'Erro!');
+            console.error(error);
+          }
+        ).add(() => this.spinner.hide());
+          window.location.reload();
     }
   }
 
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-  }
-
-  confirm(): void {
-    this.modalRef.hide();
-  }
-
-  decline(): void {
-    this.modalRef.hide();
   }
 
 }

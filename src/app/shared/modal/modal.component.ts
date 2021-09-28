@@ -9,8 +9,6 @@ import { Validators } from '@angular/forms';
 export class ModalComponent implements OnInit {
 
   people: any
-  filmesFiltered: any;
-
 
   constructor() { }
 
@@ -19,8 +17,7 @@ export class ModalComponent implements OnInit {
    }
 
    filtroUrl(): string {
-    this.filmesFiltered = this.people;
-    return this.filmesFiltered;
+    return this.people;
    }
 
 }

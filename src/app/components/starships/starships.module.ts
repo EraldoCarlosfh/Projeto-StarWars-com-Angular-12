@@ -6,9 +6,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StarshipsService } from 'src/app/services/starships.service';
 import { StarshipDetailComponent } from './starship-detail/starship-detail.component';
+import { ModalEditStarshipComponent } from 'src/app/shared/modal-edit-starship/modal-edit-starship.component';
 
 @NgModule({
-  declarations: [StarshipsComponent, StarshipDetailComponent],
+  declarations: [StarshipsComponent, StarshipDetailComponent, ModalEditStarshipComponent],
   imports: [
     CommonModule,
     FormsModule,
