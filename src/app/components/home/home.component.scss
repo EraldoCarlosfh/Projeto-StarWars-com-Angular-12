@@ -5,6 +5,8 @@
 }
 
 .container {
+  color: #1F2738;
+  font-size: 22px;
   display: flex;
   margin: 82px auto 32px;
   padding: 0 16px;
@@ -16,7 +18,7 @@
 .card {
   all: unset;
   border-radius: 40px;
-  border: 2px solid #1F2738;
+  border: 3px solid #1F2738;
   background-color: #facc00;
   height: 40px;
   width: 200px;
@@ -32,8 +34,9 @@
 
 .card:hover {
   color: #EEE;
-  border: 2px solid #EEE;
-  background-color: #facc00;
+  border: 3px solid #EEE;
+  background-color: #000;
+
 }
 
 .card-container .card:not(:last-child) {

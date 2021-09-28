@@ -1,27 +1,21 @@
 <div class="container">
 
-  <div class="">
-    <img src="../assets/StarWars3.png" id="starwars" alt="">
-  </div>
-
-  <div class="title">
+  <div class="title" id="pilots">
     <p>Pilots</p>
   </div>
-<div class="row mb-">
-  <div class="col-md-2 d-flex">
-    <a class="d-flex btn btn-outline-primary" (click)="openModalAddPilot(templateAdd)">
-      <i class="fa fa-plus-circle my-1"></i>
-      <b class="ml-1 d-none d-sm-block">Add Pilot</b>
-    </a>
-  </div>
-  <div class="col-md-10 d-flex">
+  <div class="d-flex mb-3">
     <div class="flex-fill pr-3">
       <div class="input-group mb-2">
         <input type="search" class="form-control" placeholder="Filter by name" [(ngModel)]="filterList" id="search">
       </div>
     </div>
   </div>
-</div>
+  <div class="col-md-2 d-flex">
+    <a class="d-flex btn btn-outline-primary" (click)="openModalAddPilot(templateAdd)">
+      <i class="fa fa-plus-circle my-1"></i>
+      <b class="ml-1 d-none d-sm-block">Add Pilot</b>
+    </a>
+  </div>
 
   <!-- <div *ngIf="peoples.length === 0" class="d-flex justify-content-center" style="color:white; font-size: 20px">
     There are no pilots with this filter...

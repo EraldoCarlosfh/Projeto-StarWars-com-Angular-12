@@ -74,7 +74,7 @@ export class PilotsComponent implements OnInit {
       this.peoplesFiltered = this.peoples;
       this.nameButton = 'View Less';
     }else{
-      this.toastr.error(`Existem somente: ${this.peoplesFiltered.length} pilots registrados. `, `Erro!`);
+      this.toastr.error(`There are only: ${this.peoplesFiltered.length} registered pilots.`, `Error!`);
     }
     }
   }
@@ -86,17 +86,17 @@ export class PilotsComponent implements OnInit {
         this.peoplesFiltered = this.peoples;
         this.loading();
         if (this.peoples.length === 0) {
-          this.toastr.error('Sem Pilotos cadastrados.', 'Erro!');
+          this.toastr.error('No registered pilots.', 'Error!');
         }else{
-        this.toastr.success('Dados carregados', 'Sucesso!');
+        this.toastr.success('Data loaded.', 'Success!');
       }
       },
       (error: any) => {
         if (this.peoples.length === 0) {
-          this.toastr.error('Sem Pilotos cadastrados.', 'Erro!');
+          this.toastr.error('No registered pilots.', 'Error!');
         }
         if (this.peoples.length != 0){
-         this.toastr.error('Erro ao carregar dados', 'Erro!');
+         this.toastr.error('Error loading data.', 'Error!' );
          console.error(error);
       }
       }
@@ -148,7 +148,7 @@ export class PilotsComponent implements OnInit {
 
   confirmEditPilot(): void {
     this.modalRef.hide();
-    this.toastr.success('Você será redirecionado.', 'Aguarde!');
+    this.toastr.success('You will be redirected.', 'Hold!');
   }
 
   declineEditPilot(): void {
@@ -169,11 +169,11 @@ export class PilotsComponent implements OnInit {
           namePilot = x.name;
         });
 
-          this.toastr.success(`O Piloto ${namePilot} foi deletado com sucesso`, 'Sucesso!');
+          this.toastr.success(`The Pilot ${namePilot} was successfully deleted.`, 'Success!');
           window.location.reload();
       },
       (error: any) => {
-        this.toastr.error(`Erro ao tentar deletar o Piloto ${this.peopleName}`, 'Erro!');
+        this.toastr.error(`Error when trying to delete Pilot ${this.peopleName}.`, 'Error!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());
@@ -207,10 +207,10 @@ export class PilotsComponent implements OnInit {
           this.peoplesFiltered =  this.peoples;
           this.nameButton = 'Ver menos';
         }
-        this.toastr.success('Dados carregados', 'Sucesso!');
+        this.toastr.success('Data loaded', 'Success!');
       },
       (error: any) => {
-        this.toastr.error('Erro ao carregar dados', 'Erro!');
+        this.toastr.error('Error loading data', 'Error!' );
         console.error(error);
       }
     ).add(() => this.spinner.hide());

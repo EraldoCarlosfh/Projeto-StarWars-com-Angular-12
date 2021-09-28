@@ -67,13 +67,13 @@ export class StarshipsComponent implements OnInit {
         this.loading();
 
         if (this.starships.length === 0) {
-          this.toastr.error('Sem Starships cadastradas.', 'Erro!');
+          this.toastr.error('No registered starships.', 'Error!');
         }else {
-        this.toastr.success('Dados carregados', 'Sucesso!');
+          this.toastr.success('Data loaded.', 'Success!');
       }
       },
       (error: any) => {
-          this.toastr.error('Erro ao carregar dados', 'Erro!');
+          this.toastr.error('Error loading data.', 'Error!' );
           console.error(error);
       }
     ).add(() => this.spinner.hide());
@@ -102,7 +102,7 @@ export class StarshipsComponent implements OnInit {
       this.starshipsFiltered = this.starships;
       this.nameButton = 'View Less';
     }else{
-      this.toastr.error(`Existem somente: ${this.starshipsFiltered.length} starships registradas. `, `Erro!`);
+      this.toastr.error(`There are only: ${this.starshipsFiltered.length} registered starships.`, `Error!`);
     }
     }
   }
@@ -112,10 +112,10 @@ export class StarshipsComponent implements OnInit {
       (starships: any) => {
         this.starships = starships;
         this.starshipsFiltered = this.starships;
-        this.toastr.success('Dados carregados', 'Sucesso!');
+        this.toastr.success('Data loaded.', 'Success!');
       },
       (error: any) => {
-        this.toastr.error('Erro ao carregar dados', 'Erro!');
+        this.toastr.error('Error loading data.', 'Error!' );
         console.error(error);
       }
     ).add(() => this.spinner.hide());
@@ -155,11 +155,11 @@ export class StarshipsComponent implements OnInit {
           nameStarship = x.name;
         });
 
-          this.toastr.success(`O Starship ${nameStarship} foi deletada com sucesso`, 'Sucesso!');
+          this.toastr.success(`The Starship ${nameStarship} was successfully deleted.`, 'Success!');
           window.location.reload();
       },
       (error: any) => {
-        this.toastr.error(`Erro ao tentar deletar a Starship ${this.starshipName}`, 'Erro!');
+        this.toastr.error(`Error when trying to delete Starship ${this.starshipName}.`, 'Error!');
         console.error(error);
       }
     ).add(() => this.spinner.hide());
@@ -184,7 +184,7 @@ export class StarshipsComponent implements OnInit {
 
     confirmEditStarship(): void {
       this.modalRef.hide();
-      this.toastr.success('Você será redirecionado.', 'Aguarde!');
+      this.toastr.success('You will be redirected.', 'Hold!');
     }
 
     declineEditStarship(): void {
