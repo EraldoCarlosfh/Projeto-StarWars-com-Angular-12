@@ -78,3 +78,23 @@ p {
   font-weight: 400;
   text-shadow: 0.1em 0.1em 0.2em black;
 }
+
+@media screen and (max-width: 435px) {
+
+  #starwars {
+    height: 180px;
+    width: 300px;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+
+  #starwars {
+    height: 180px;
+    width: 300px;
+  }
+
+  }
+
+

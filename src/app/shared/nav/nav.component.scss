@@ -48,17 +48,46 @@ a {
   margin: 0 16px;
 }
 
-.toolbar #twitter-logo {
-  height: 40px;
-  margin: 0 8px;
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+  span {
+    display: none;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center
+  }
+
+  .toolbar {
+    justify-content: space-around;
+  }
 }
 
-.toolbar #youtube-logo {
-  height: 40px;
-  margin: 0 16px;
+@media screen and (max-width: 435px) {
+
+  span,
+  a {
+    display: none;
+  }
+
+  .nav-link {
+    align-items: center
+  }
+
+  .toolbar {
+    justify-content: space-around;
+  }
+
+  #navitens {
+    margin-left: 50px;
+  }
+
 }
 
-.toolbar #twitter-logo:hover,
-.toolbar #youtube-logo:hover {
-  opacity: 0.8;
+@media screen and (max-width: 320px) {
+  #navitens {
+    margin-left: 50px;
+  }
+
 }
